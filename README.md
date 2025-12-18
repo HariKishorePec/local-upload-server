@@ -2,7 +2,7 @@
 
 Seamlessly transfer files between computers and mobile devices over your local network.
 
-<img width="887" height="566" alt="image" src="https://github.com/user-attachments/assets/1aee04ed-c429-49bd-82b1-0c3bed637645" />
+<img width="892" height="702" alt="image" src="https://github.com/user-attachments/assets/675c645c-c593-437d-a493-01461bd5fa00" />
 
 
 ## Features
