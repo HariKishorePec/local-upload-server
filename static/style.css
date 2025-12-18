@@ -2,6 +2,7 @@ body {
   min-height: 100vh;
   margin: 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   background: #f7f7f7;
@@ -15,6 +16,21 @@ body {
   width: 100%;
   max-width: 350px;
   text-align: center;
+  margin-top: 1.5rem;
+}
+/* Center the h1 horizontally and add spacing */
+h1 {
+  text-align: center;
+  margin: 0;
+  margin-bottom: 0.5rem;
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: #222;
+  letter-spacing: 0.01em;
+}
+
+h1 span {
+  color: #007bff;
 }
 h2 {
   margin-bottom: 1.5rem;
