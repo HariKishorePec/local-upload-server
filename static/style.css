@@ -14,7 +14,7 @@ body {
   border-radius: 12px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   width: 100%;
-  max-width: 350px;
+  max-width: 550px;
   text-align: center;
   margin-top: 1.5rem;
 }
@@ -58,4 +58,10 @@ button:hover {
     padding: 1rem 0.5rem;
     max-width: 90vw;
   }
+}
+
+.footer {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: #666;
 }
