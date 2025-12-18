@@ -26,7 +26,7 @@ This project is a Node.js-based file upload server with a modern web interface. 
 ## Transferring Files from Another Computer
 
 1. Launch the application on the destination PC or server.
-2. Obtain the IPv4 address of the destination machine.
+2. Obtain the IPv4 address of the destination machine. (use commands `ipconfig` for windows or `ipconfig getifaddr en0` for mac)
 3. On the source PC, open a web browser and navigate to `http://<IPv4_address>:<port>` (e.g. `192.168.1.5:8000`).
 4. Verify uploaded files on destination PC. Yay!
 
