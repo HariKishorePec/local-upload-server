@@ -20,7 +20,20 @@
         <div id="progressContainer" style="display:none;margin-top:1.2rem;"></div>
         <div id="resultMsg" style="margin-top:1.2rem;"></div>
     </div>
+    <div id="uploadPathInfo">
+        <b>Uploads folder path:</b><br>
+        <span id="dynamicUploadPath">Upload folder in same directory as Application</span>
+    </div>
     <script>
+        // Fetch and display the dynamic uploads folder path
+        fetch('/upload-folder-path')
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('dynamicUploadPath').textContent = data.uploadPath;
+            })
+            .catch(() => {
+                document.getElementById('dynamicUploadPath').textContent = 'Error loading path';
+            });
         const form = document.getElementById('uploadForm');
         const fileInput = document.getElementById('fileInput');
         const progressContainer = document.getElementById('progressContainer');

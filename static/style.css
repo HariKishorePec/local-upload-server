@@ -65,3 +65,15 @@ button:hover {
   font-size: 0.9rem;
   color: #666;
 }
+
+/* Upload Path Info Styles */
+#uploadPathInfo {
+  margin-top: 1.5rem;
+  max-width: 550px;
+  width: 100%;
+  text-align: center;
+  background: #f1f1f1;
+  padding: 0.7em 0.7em;
+  border-radius: 6px;
+  word-break: break-all;
+}

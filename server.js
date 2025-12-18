@@ -36,6 +36,11 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "static", "index.html"));
 });
 
+// Endpoint to get the uploads folder absolute path
+app.get("/upload-folder-path", (req, res) => {
+  res.json({ uploadPath: UPLOAD_DIR });
+});
+
 // upload endpoint (support multiple files)
 app.post("/upload", upload.single("file"), (req, res) => {
   // If multiple files, req.files will be set (from upload.array)
