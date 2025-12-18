@@ -29,13 +29,27 @@ const upload = multer({
 // upload page
 app.get("/", (req, res) => {
   res.send(`
-    <h2>File Upload</h2>
-    <form method="POST" enctype="multipart/form-data" action="/upload">
-      <input type="file" name="file" required />
-      <br/><br/>
-      <button type="submit">Upload</button>
-    </form>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>File Upload</title>
+      <link rel="stylesheet" href="/uploads/style.css">
+    </head>
+    <body>
+      <div class="container">
+        <h2>File Upload</h2>
+        <form method="POST" enctype="multipart/form-data" action="/upload">
+          <input type="file" name="file" required />
+          <button type="submit">Upload</button>
+        </form>
+      </div>
+    </body>
+    </html>
   `);
+  // Serve static files from uploads (for style.css)
+  app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 });
 
 // upload endpoint
