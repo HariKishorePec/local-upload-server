@@ -13,64 +13,101 @@
     <div class="container">
         <h2>File Upload</h2>
         <form id="uploadForm">
-            <input type="file" name="file" id="fileInput" required />
+            <input type="file" name="files" id="fileInput" multiple required />
             <button type="submit">Upload</button>
         </form>
-        <div id="progressContainer" style="display:none;margin-top:1.2rem;">
-            <div id="progressBar"
-                style="height:18px;width:0;background:#007bff;border-radius:6px;transition:width 0.2s;"></div>
-            <div id="progressText" style="margin-top:0.5rem;font-size:0.95rem;"></div>
-        </div>
+        <div id="progressContainer" style="display:none;margin-top:1.2rem;"></div>
         <div id="resultMsg" style="margin-top:1.2rem;"></div>
     </div>
     <script>
         const form = document.getElementById('uploadForm');
         const fileInput = document.getElementById('fileInput');
         const progressContainer = document.getElementById('progressContainer');
-        const progressBar = document.getElementById('progressBar');
-        const progressText = document.getElementById('progressText');
         const resultMsg = document.getElementById('resultMsg');
+
+        function createProgressBar(fileName) {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'file-progress-wrapper';
+            wrapper.style.marginBottom = '1.1rem';
+            const label = document.createElement('div');
+            label.textContent = fileName;
+            label.style.fontSize = '0.97rem';
+            label.style.marginBottom = '0.3rem';
+            const barBg = document.createElement('div');
+            barBg.style.height = '18px';
+            barBg.style.background = '#e9ecef';
+            barBg.style.borderRadius = '6px';
+            barBg.style.overflow = 'hidden';
+            const bar = document.createElement('div');
+            bar.className = 'progress-bar';
+            bar.style.height = '18px';
+            bar.style.width = '0';
+            bar.style.background = '#007bff';
+            bar.style.borderRadius = '6px';
+            bar.style.transition = 'width 0.2s';
+            barBg.appendChild(bar);
+            const percentText = document.createElement('div');
+            percentText.className = 'progress-text';
+            percentText.style.marginTop = '0.3rem';
+            percentText.style.fontSize = '0.95rem';
+            wrapper.appendChild(label);
+            wrapper.appendChild(barBg);
+            wrapper.appendChild(percentText);
+            return { wrapper, bar, percentText };
+        }
+
         form.addEventListener('submit', function (e) {
             e.preventDefault();
-            const file = fileInput.files[0];
-            if (!file) return;
-            const formData = new FormData();
-            formData.append('file', file);
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', '/upload', true);
+            const files = fileInput.files;
+            if (!files.length) return;
+            progressContainer.innerHTML = '';
             progressContainer.style.display = 'block';
-            progressBar.style.width = '0';
-            progressText.textContent = '';
             resultMsg.textContent = '';
-            xhr.upload.onprogress = function (e) {
-                if (e.lengthComputable) {
-                    const percent = Math.round((e.loaded / e.total) * 100);
-                    progressBar.style.width = percent + '%';
-                    progressText.textContent = percent + '%';
-                }
-            };
-            xhr.onload = function () {
-                if (xhr.status === 200) {
-                    progressBar.style.width = '100%';
-                    progressText.textContent = '100%';
-                    try {
-                        const res = JSON.parse(xhr.responseText);
-                        resultMsg.textContent = res.message || 'Upload successful!';
-                        resultMsg.style.color = '#28a745';
-                    } catch {
-                        resultMsg.textContent = 'Upload successful!';
-                        resultMsg.style.color = '#28a745';
+            let completed = 0;
+            let failed = 0;
+            Array.from(files).forEach(file => {
+                const { wrapper, bar, percentText } = createProgressBar(file.name);
+                progressContainer.appendChild(wrapper);
+                const formData = new FormData();
+                formData.append('file', file);
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', '/upload', true);
+                xhr.upload.onprogress = function (e) {
+                    if (e.lengthComputable) {
+                        const percent = Math.round((e.loaded / e.total) * 100);
+                        bar.style.width = percent + '%';
+                        percentText.textContent = percent + '%';
                     }
-                } else {
-                    resultMsg.textContent = 'Upload failed!';
-                    resultMsg.style.color = '#dc3545';
-                }
-            };
-            xhr.onerror = function () {
-                resultMsg.textContent = 'Upload failed!';
-                resultMsg.style.color = '#dc3545';
-            };
-            xhr.send(formData);
+                };
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        bar.style.width = '100%';
+                        percentText.textContent = '100%';
+                        wrapper.style.borderLeft = '4px solid #28a745';
+                        completed++;
+                    } else {
+                        percentText.textContent = 'Failed!';
+                        bar.style.background = '#dc3545';
+                        wrapper.style.borderLeft = '4px solid #dc3545';
+                        failed++;
+                    }
+                    if (completed + failed === files.length) {
+                        resultMsg.textContent = `${completed} uploaded, ${failed} failed.`;
+                        resultMsg.style.color = failed ? '#dc3545' : '#28a745';
+                    }
+                };
+                xhr.onerror = function () {
+                    percentText.textContent = 'Failed!';
+                    bar.style.background = '#dc3545';
+                    wrapper.style.borderLeft = '4px solid #dc3545';
+                    failed++;
+                    if (completed + failed === files.length) {
+                        resultMsg.textContent = `${completed} uploaded, ${failed} failed.`;
+                        resultMsg.style.color = failed ? '#dc3545' : '#28a745';
+                    }
+                };
+                xhr.send(formData);
+            });
         });
     </script>
 </body>

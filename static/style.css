@@ -56,6 +56,6 @@ button:hover {
 @media (max-width: 500px) {
   .container {
     padding: 1rem 0.5rem;
-    max-width: 95vw;
+    max-width: 90vw;
   }
 }
