@@ -2,6 +2,9 @@
 
 Seamlessly transfer files between computers and mobile devices over your local network.
 
+<img width="887" height="566" alt="image" src="https://github.com/user-attachments/assets/1aee04ed-c429-49bd-82b1-0c3bed637645" />
+
+
 ## Features
 
 - **Upload multiple files at once**
