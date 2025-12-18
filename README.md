@@ -4,7 +4,6 @@ Seamlessly transfer files between computers and mobile devices over your local n
 
 <img width="892" height="702" alt="image" src="https://github.com/user-attachments/assets/675c645c-c593-437d-a493-01461bd5fa00" />
 
-
 ## Features
 
 - **Upload multiple files at once**
@@ -29,6 +28,10 @@ This project is a Node.js-based file upload server with a modern web interface. 
 2. Obtain the IPv4 address of the destination machine. (use commands `ipconfig` for windows or `ipconfig getifaddr en0` for mac)
 3. On the source PC, open a web browser and navigate to `http://<IPv4_address>:<port>` (e.g. `192.168.1.5:8000`).
 4. Verify uploaded files on destination PC. Yay!
+
+## Disclaimer
+
+This software is provided for educational and personal use only. Use it at your own discretion. The author is not responsible for any misuse. All responsibility for the use of this software lies solely with the user.
 
 ---
 
