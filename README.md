@@ -1,5 +1,7 @@
 # local-upload-server
 
+Seamlessly transfer files between computers and mobile devices over your local network.
+
 ## Features
 
 - **Upload multiple files at once**
@@ -17,6 +19,13 @@ This project is a Node.js-based file upload server with a modern web interface. 
 1. Start the server: `node server.js`
 2. Open your browser and navigate to `http://localhost:PORT` (replace PORT with your configured port if different).
 3. Use the web interface to select and upload files.
+
+## Transferring Files from Another Computer
+
+1. Launch the application on the destination PC or server.
+2. Obtain the IPv4 address of the destination machine.
+3. On the source PC, open a web browser and navigate to `http://<IPv4_address>:<port>`.
+4. Verify uploaded files on destination PC.
 
 ---
 
