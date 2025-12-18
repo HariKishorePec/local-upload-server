@@ -25,7 +25,7 @@ This project is a Node.js-based file upload server with a modern web interface. 
 1. Launch the application on the destination PC or server.
 2. Obtain the IPv4 address of the destination machine.
 3. On the source PC, open a web browser and navigate to `http://<IPv4_address>:<port>`.
-4. Verify uploaded files on destination PC.
+4. Verify uploaded files on destination PC. Yay!
 
 ---
 
