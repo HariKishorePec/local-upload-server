@@ -20,14 +20,14 @@ This project is a Node.js-based file upload server with a modern web interface. 
 ## Usage
 
 1. Start the server: `node server.js`
-2. Open your browser and navigate to `http://localhost:PORT` (replace PORT with your configured port if different).
+2. Open your browser and navigate to `http://localhost:8000` (replace PORT with your configured port if different).
 3. Use the web interface to select and upload files.
 
 ## Transferring Files from Another Computer
 
 1. Launch the application on the destination PC or server.
 2. Obtain the IPv4 address of the destination machine.
-3. On the source PC, open a web browser and navigate to `http://<IPv4_address>:<port>`.
+3. On the source PC, open a web browser and navigate to `http://<IPv4_address>:<port>` (e.g. `192.168.1.5:8000`).
 4. Verify uploaded files on destination PC. Yay!
 
 ---
