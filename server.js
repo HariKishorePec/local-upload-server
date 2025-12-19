@@ -2,6 +2,8 @@ const express = require("express");
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
+const os = require("os");
+const chalk = require("chalk");
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -86,4 +88,16 @@ app.post("/upload-multi", upload.array("files"), (req, res) => {
 });
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running at http://localhost:${PORT}`);
+  ipHelper();
 });
+
+function ipHelper() {
+  const networkInterfaces = os.networkInterfaces();
+  // console.log("networkInterfaces: ", networkInterfaces);
+  const ip = Object.values(networkInterfaces)
+    .flat()
+    .find((iface) => iface.family === "IPv4" && !iface.internal)?.address;
+  if (ip) {
+    console.log(chalk.green.bold(`On the Network: http://${ip}:${PORT}`));
+  }
+}
