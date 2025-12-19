@@ -4,7 +4,7 @@ const path = require("path");
 const fs = require("fs");
 
 const app = express();
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
 // ensure uploads folder exists
 const UPLOAD_DIR = process.env.ANDROID ? `${process.env.HOME}/storage/downloads/hari-termux/uploads` : path.join(__dirname, "uploads");

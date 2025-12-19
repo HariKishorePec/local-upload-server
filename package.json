@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
+    "start:android": "ANDROID=1 PORT=5002 node server.js",
     "install": "npm install express multer",
     "dev": "nodemon server.js"
   },
