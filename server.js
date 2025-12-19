@@ -43,7 +43,8 @@ app.get("/", (req, res) => {
 
 // Endpoint to get the uploads folder absolute path
 app.get("/upload-folder-path", (req, res) => {
-  res.json({ uploadPath: UPLOAD_DIR });
+  const uploadPath = process.env.ANDROID ? `Directory on Android: ~/downloads/hari-termux/uploads` : path.join(__dirname, "uploads");
+  res.json({ uploadPath });
 });
 
 // upload endpoint (support multiple files)
