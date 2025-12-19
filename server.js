@@ -7,7 +7,8 @@ const app = express();
 const PORT = 8000;
 
 // ensure uploads folder exists
-const UPLOAD_DIR = path.join(__dirname, "uploads");
+const UPLOAD_DIR = process.env.ANDROID ? `${process.env.HOME}/storage/downloads/hari-termux/uploads` : path.join(__dirname, "uploads");
+console.log("UPLOAD_DIR: ", UPLOAD_DIR);
 if (!fs.existsSync(UPLOAD_DIR)) {
   fs.mkdirSync(UPLOAD_DIR);
 }
@@ -17,7 +18,8 @@ const storage = multer.diskStorage({
   destination: UPLOAD_DIR,
   filename: (req, file, cb) => {
     const uniqueName = Date.now() + "-" + Math.round(Math.random() * 1e9) + path.extname(file.originalname);
-    cb(null, uniqueName);
+    // cb(null, uniqueName);
+    cb(null, file.originalname);
   },
 });
 
@@ -44,6 +46,8 @@ app.get("/upload-folder-path", (req, res) => {
 // upload endpoint (support multiple files)
 app.post("/upload", upload.single("file"), (req, res) => {
   // If multiple files, req.files will be set (from upload.array)
+  console.log("Upload request for req.files: ", req.files?.originalname || req.file?.originalname, " size: ", Number(req.files?.size || req.file?.size / 1024 / 1024).toFixed(2), "MB");
+
   if (req.files && Array.isArray(req.files)) {
     res.json({
       message: "Upload successful",
