@@ -10,7 +10,8 @@ const PORT = process.env.PORT || 8000;
 const UPLOAD_DIR = process.env.ANDROID ? `${process.env.HOME}/storage/downloads/hari-termux/uploads` : path.join(__dirname, "uploads");
 console.log("UPLOAD_DIR: ", UPLOAD_DIR);
 if (!fs.existsSync(UPLOAD_DIR)) {
-  fs.mkdirSync(UPLOAD_DIR);
+  fs.mkdirSync(UPLOAD_DIR, { recursive: true });
+  console.log("Created uploads directory.");
 }
 
 // multer config
